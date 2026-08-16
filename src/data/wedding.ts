@@ -14,15 +14,15 @@ export const weddingConfig = {
     bio: "A pediatric cardiologist with a love for classical dance and cooking, Anjali brings warmth and joy wherever she goes. She said yes on a starlit evening by Lake Pichola.",
   },
   hashtag: '#NilaakashWedsAnjali',
-  weddingDate: '2026-12-12T16:30:00',
-  weddingDateDisplay: 'December 12, 2026',
+  weddingDate: '2026-12-03T16:30:00',
+  weddingDateDisplay: 'December 3, 2026',
   city: 'Udaipur, Rajasthan',
   venue: 'The Leela Palace, Lake Pichola',
   events: [
     {
       id: 'mehndi',
       name: 'Mehndi Ceremony',
-      date: 'December 10, 2026',
+      date: 'December 1, 2026',
       time: '4:00 PM – 7:00 PM',
       venue: 'Garden Terrace, The Leela Palace',
       description: "Join us for an afternoon of intricate henna art, music, and celebration as the bride's hands are adorned with beautiful mehndi designs.",
@@ -33,7 +33,7 @@ export const weddingConfig = {
     {
       id: 'haldi',
       name: 'Haldi Ceremony',
-      date: 'December 11, 2026',
+      date: 'December 2, 2026',
       time: '10:00 AM – 12:00 PM',
       venue: 'Courtyard, The Leela Palace',
       description: "A joyous morning ritual where turmeric paste is applied to the couple for blessings of prosperity and glowing skin before the wedding day.",
@@ -44,7 +44,7 @@ export const weddingConfig = {
     {
       id: 'sangeet',
       name: 'Sangeet Night',
-      date: 'December 11, 2026',
+      date: 'December 2, 2026',
       time: '7:00 PM – 11:00 PM',
       venue: 'Grand Ballroom, The Leela Palace',
       description: "An evening of music, dance performances by family and friends, and a feast of delicacies. Get ready to dance the night away!",
@@ -55,7 +55,7 @@ export const weddingConfig = {
     {
       id: 'ceremony',
       name: 'Vedic Wedding Ceremony',
-      date: 'December 12, 2026',
+      date: 'December 3, 2026',
       time: '4:30 PM – 7:00 PM',
       venue: 'Mandap, Lakeside Lawn, The Leela Palace',
       description: "The sacred Vedic ceremony under the mandap, with the holy fire as witness, as Nilaakash and Anjali take their seven vows (saat phere) together.",
@@ -66,7 +66,7 @@ export const weddingConfig = {
     {
       id: 'reception',
       name: 'Reception Gala',
-      date: 'December 13, 2026',
+      date: 'December 4, 2026',
       time: '7:00 PM – 11:30 PM',
       venue: 'Grand Ballroom, The Leela Palace',
       description: "A grand celebration dinner to welcome the newlyweds, with live music, a lavish buffet, and dancing under the stars.",
@@ -112,7 +112,7 @@ export const weddingConfig = {
     },
     {
       q: 'What is the best way to get to Udaipur?',
-      a: 'Udaipur is well-connected by air (Maharana Pratap Airport, ~30 min from the venue) and rail. We recommend arriving by December 9th to enjoy all the festivities.',
+      a: 'Udaipur is well-connected by air (Maharana Pratap Airport, ~30 min from the venue) and rail. We recommend arriving by November 30th to enjoy all the festivities.',
     },
   ],
   hotels: [
