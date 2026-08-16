@@ -4,6 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
+        "ivory-base": "#FEFAF3",
+        "royal-gold": "#C69C6D",
+        "crimson-deep": "#8B0000",
+        "charcoal-text": "#2C2C2C",
+        "marigold-accent": "#F5B041",
+        "forest-green": "#27AE60",
         // Warm Indian wedding palette
         saffron: {
           50: '#fef7ed',
@@ -80,6 +86,22 @@ export default {
         heading: ['Marcellus', 'serif'],
         cinzel: ['Cinzel', 'serif'],
         body: ['Inter', 'sans-serif'],
+        "display-lg-mobile": ["Marcellus", "serif"],
+        "display-lg": ["Marcellus", "serif"],
+        "headline-sm": ["Cinzel", "serif"],
+        "headline-md": ["Cinzel", "serif"],
+        "body-md": ["Inter", "sans-serif"],
+        "body-lg": ["Inter", "sans-serif"],
+        "label-caps": ["Inter", "sans-serif"]
+      },
+      fontSize: {
+        "display-lg-mobile": ["36px", { "lineHeight": "44px", "fontWeight": "700" }],
+        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+        "label-caps": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "500", "textTransform": "uppercase" }]
       },
       animation: {
         'fade-in': 'fadeIn 1.2s ease-out forwards',

@@ -9,14 +9,16 @@ import { Footer } from '@/components/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen bg-cream-50">
+    <div className="min-h-screen bg-ivory-base font-body-md text-charcoal-text antialiased flex flex-col">
       <Navbar />
-      <Hero />
-      <OurStory />
-      <Events />
-      <Gallery />
-      <Travel />
-      <FAQ />
+      <main className="flex-grow pb-12">
+        <Hero />
+        <OurStory />
+        <Events />
+        <Gallery />
+        <Travel />
+        <FAQ />
+      </main>
       <Footer />
     </div>
   );
