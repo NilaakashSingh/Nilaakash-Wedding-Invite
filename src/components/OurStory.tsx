@@ -87,17 +87,17 @@ export function OurStory() {
               {
                 date: 'Spring 2023',
                 title: 'First Meeting',
-                text: "Aarav and Diya met at a mutual friend's destination wedding in Udaipur. A conversation by the lake turned into a night of laughter and dancing.",
+                text: "Nilaakash and Anjali met at a mutual friend's destination wedding in Udaipur. A conversation by the lake turned into a night of laughter and dancing.",
               },
               {
                 date: 'Summer 2023',
                 title: 'First Date',
-                text: "Aarav flew to Ahmedabad to take Diya on a traditional Gujarati thali dinner, followed by a long walk through the old city.",
+                text: "Nilaakash flew to Ahmedabad to take Anjali on a traditional Gujarati thali dinner, followed by a long walk through the old city.",
               },
               {
                 date: 'Winter 2024',
                 title: 'The Proposal',
-                text: "On a starlit evening by Lake Pichola, Aarav got down on one knee. Diya said yes before he could even finish the question.",
+                text: "On a starlit evening by Lake Pichola, Nilaakash got down on one knee. Anjali said yes before he could even finish the question.",
               },
               {
                 date: 'December 2026',
