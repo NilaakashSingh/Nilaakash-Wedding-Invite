@@ -61,12 +61,13 @@ export function Travel() {
         </div>
 
         {/* Hotels */}
+        {(weddingConfig.hotels ?? []).length > 0 && (
         <div>
           <h3 className="font-heading text-xl text-saffron-700 text-center mb-6">
             Recommended Accommodation
           </h3>
           <div className="space-y-4">
-            {weddingConfig.hotels.map((hotel, i) => (
+            {(weddingConfig.hotels ?? []).map((hotel, i) => (
               <div
                 key={i}
                 className="glass-card rounded-xl p-5 flex items-center gap-4 hover:shadow-lg transition-shadow duration-300"
@@ -90,6 +91,7 @@ export function Travel() {
             ))}
           </div>
         </div>
+      )}
       </div>
     </section>
   );
