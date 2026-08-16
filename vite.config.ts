@@ -4,7 +4,7 @@ import { fileURLToPath, URL } from 'node:url';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/Nilaakash-Wedding_Invite/',
+  base: '/Nilaakash-Wedding-Invite/',
   plugins: [react()],
   resolve: {
     alias: {
