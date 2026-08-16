@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const navItems = [
@@ -11,14 +11,7 @@ const navItems = [
 ];
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   const handleClick = (href: string) => {
     setOpen(false);
@@ -27,64 +20,69 @@ export function Navbar() {
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-cream-50/95 backdrop-blur-md shadow-lg shadow-marigold-900/5 py-3'
-          : 'bg-transparent py-5'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <button
-          onClick={() => handleClick('#home')}
-          className={`font-cinzel text-lg tracking-widest transition-colors duration-500 ${
-            scrolled ? 'text-saffron-700' : 'text-cream-50'
-          }`}
-        >
-          A<span className="text-marigold-400 mx-0.5">&amp;</span>D
-        </button>
+    <header className="bg-ivory-base dark:bg-surface font-headline-sm text-headline-sm docked full-width top-0 z-50 flat no shadows flex justify-between items-center w-full px-4 md:px-8 py-4 sticky">
+      <button
+        onClick={() => setOpen(!open)}
+        className="hover:scale-105 transition-transform active:scale-95 duration-150 text-crimson-deep dark:text-primary-fixed-dim p-2 md:hidden"
+      >
+        {open ? <X size={24} /> : <Menu size={24} />}
+      </button>
 
-        <div className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => (
-            <button
-              key={item.href}
-              onClick={() => handleClick(item.href)}
-              className={`font-body text-sm tracking-wide transition-colors duration-300 hover:text-marigold-500 ${
-                scrolled ? 'text-charcoal-700' : 'text-cream-100/90'
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-
-        <button
-          onClick={() => setOpen(!open)}
-          className={`md:hidden ${scrolled ? 'text-charcoal-800' : 'text-cream-50'}`}
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+      {/* Desktop Links (Left) */}
+      <div className="hidden md:flex items-center gap-6">
+        {navItems.slice(0, 3).map((item) => (
+          <button
+            key={item.href}
+            onClick={() => handleClick(item.href)}
+            className="font-body-md text-charcoal-text hover:text-crimson-deep transition-colors"
+          >
+            {item.label}
+          </button>
+        ))}
       </div>
+
+      <h1
+        onClick={() => handleClick('#home')}
+        className="font-display-lg-mobile text-display-lg-mobile text-crimson-deep font-extrabold tracking-tight cursor-pointer"
+      >
+        N &amp; A Wedding
+      </h1>
+
+      {/* Desktop Links (Right) */}
+      <div className="hidden md:flex items-center gap-6">
+        {navItems.slice(3).map((item) => (
+          <button
+            key={item.href}
+            onClick={() => handleClick(item.href)}
+            className="font-body-md text-charcoal-text hover:text-crimson-deep transition-colors"
+          >
+            {item.label}
+          </button>
+        ))}
+      </div>
+
+      <button className="hover:scale-105 transition-transform active:scale-95 duration-150 text-crimson-deep dark:text-primary-fixed-dim p-2 md:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+      </button>
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-500 ${
-          open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        className={`md:hidden absolute top-full left-0 right-0 bg-ivory-base border-t border-royal-gold/30 shadow-md overflow-hidden transition-all duration-300 ${
+          open ? 'max-h-96 opacity-100 py-4' : 'max-h-0 opacity-0 py-0'
         }`}
       >
-        <div className="bg-cream-50/98 backdrop-blur-md px-6 py-4 flex flex-col gap-3 border-t border-marigold-200/50">
+        <div className="flex flex-col gap-3 px-6">
           {navItems.map((item) => (
             <button
               key={item.href}
               onClick={() => handleClick(item.href)}
-              className="text-left font-body text-sm text-charcoal-700 hover:text-saffron-600 transition-colors py-1.5"
+              className="text-left font-body-md text-charcoal-text hover:text-crimson-deep transition-colors py-2"
             >
               {item.label}
             </button>
           ))}
         </div>
       </div>
-    </nav>
+    </header>
   );
 }
