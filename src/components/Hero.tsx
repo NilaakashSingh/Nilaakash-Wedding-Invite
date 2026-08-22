@@ -15,10 +15,16 @@ export function Hero() {
   return (
     <>
       <section id="home" className="px-4 md:px-8 pt-4 pb-8 flex flex-col items-center text-center">
-        <div className="w-full flex border-b border-royal-gold/30 mb-8 max-w-sm mx-auto">
+        <div
+          className="w-full flex border-b border-royal-gold/30 mb-8 max-w-sm mx-auto"
+          role="radiogroup"
+          aria-label="Select Invite Type"
+        >
           <button
+            role="radio"
+            aria-checked={inviteType === 'groom'}
             onClick={() => setInviteType('groom')}
-            className={`flex-1 py-3 font-label-caps text-label-caps transition-all duration-300 border-b-2 ${
+            className={`flex-1 py-3 font-label-caps text-label-caps transition-all duration-300 border-b-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-crimson-deep ${
               inviteType === 'groom'
                 ? 'text-crimson-deep border-crimson-deep'
                 : 'text-charcoal-text border-transparent hover:text-crimson-deep'
@@ -27,8 +33,10 @@ export function Hero() {
             Groom Invite
           </button>
           <button
+            role="radio"
+            aria-checked={inviteType === 'bride'}
             onClick={() => setInviteType('bride')}
-            className={`flex-1 py-3 font-label-caps text-label-caps transition-all duration-300 border-b-2 ${
+            className={`flex-1 py-3 font-label-caps text-label-caps transition-all duration-300 border-b-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-crimson-deep ${
               inviteType === 'bride'
                 ? 'text-crimson-deep border-crimson-deep'
                 : 'text-charcoal-text border-transparent hover:text-crimson-deep'
