@@ -1,88 +1,74 @@
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
-
-const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'Our Story', href: '#story' },
-  { label: 'Events', href: '#events' },
-  { label: 'Gallery', href: '#gallery' },
-  { label: 'Travel', href: '#travel' },
-  { label: 'FAQ', href: '#faq' },
-];
+import { useState, useEffect } from 'react';
+import { Download, X } from 'lucide-react';
 
 export function Navbar() {
-  const [open, setOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  const handleClick = (href: string) => {
-    setOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setShowModal(false);
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, []);
 
   return (
-    <header className="bg-ivory-base dark:bg-surface font-headline-sm text-headline-sm docked full-width top-0 z-50 flat no shadows flex justify-between items-center w-full px-4 md:px-8 py-4 sticky">
-      <button
-        onClick={() => setOpen(!open)}
-        className="hover:scale-105 transition-transform active:scale-95 duration-150 text-crimson-deep dark:text-primary-fixed-dim p-2 md:hidden"
-      >
-        {open ? <X size={24} /> : <Menu size={24} />}
-      </button>
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-ivory-base/80 backdrop-blur-md border-b border-royal-gold/20 px-6 py-4 flex justify-between items-center transition-all duration-300">
+        <h1
+          onClick={() => document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' })}
+          className="font-cinzel text-xl md:text-2xl text-crimson-deep font-bold tracking-widest cursor-pointer"
+        >
+          N &amp; A
+        </h1>
 
-      {/* Desktop Links (Left) */}
-      <div className="hidden md:flex items-center gap-6">
-        {navItems.slice(0, 3).map((item) => (
-          <button
-            key={item.href}
-            onClick={() => handleClick(item.href)}
-            className="font-body-md text-charcoal-text hover:text-crimson-deep transition-colors"
+        <button
+          onClick={() => setShowModal(true)}
+          className="font-label-caps text-label-caps bg-crimson-deep text-white px-5 py-2 rounded-full hover:bg-crimson-deep/90 transition-colors shadow-sm"
+        >
+          View Invitation
+        </button>
+      </header>
+
+      {/* PDF Modal */}
+      {showModal && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in p-4 md:p-8"
+          onClick={() => setShowModal(false)}
+        >
+          <div
+            className="bg-ivory-base rounded-xl w-full max-w-4xl h-[85vh] flex flex-col shadow-2xl transform scale-100 transition-transform duration-300 relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
           >
-            {item.label}
-          </button>
-        ))}
-      </div>
-
-      <h1
-        onClick={() => handleClick('#home')}
-        className="font-display-lg-mobile text-display-lg-mobile text-crimson-deep font-extrabold tracking-tight cursor-pointer"
-      >
-        N &amp; A Wedding
-      </h1>
-
-      {/* Desktop Links (Right) */}
-      <div className="hidden md:flex items-center gap-6">
-        {navItems.slice(3).map((item) => (
-          <button
-            key={item.href}
-            onClick={() => handleClick(item.href)}
-            className="font-body-md text-charcoal-text hover:text-crimson-deep transition-colors"
-          >
-            {item.label}
-          </button>
-        ))}
-      </div>
-
-      <button className="hover:scale-105 transition-transform active:scale-95 duration-150 text-crimson-deep dark:text-primary-fixed-dim p-2 md:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-      </button>
-
-      {/* Mobile menu */}
-      <div
-        className={`md:hidden absolute top-full left-0 right-0 bg-ivory-base border-t border-royal-gold/30 shadow-md overflow-hidden transition-all duration-300 ${
-          open ? 'max-h-96 opacity-100 py-4' : 'max-h-0 opacity-0 py-0'
-        }`}
-      >
-        <div className="flex flex-col gap-3 px-6">
-          {navItems.map((item) => (
-            <button
-              key={item.href}
-              onClick={() => handleClick(item.href)}
-              className="text-left font-body-md text-charcoal-text hover:text-crimson-deep transition-colors py-2"
-            >
-              {item.label}
-            </button>
-          ))}
+            <div className="flex justify-between items-center p-4 border-b border-royal-gold/20 bg-cream-50">
+              <h2 className="font-cinzel text-xl text-charcoal-text">Wedding Invitation</h2>
+              <div className="flex items-center gap-4">
+                <a
+                  href={`${import.meta.env.BASE_URL}invitation.pdf`}
+                  download
+                  className="flex items-center gap-2 text-crimson-deep hover:text-crimson-deep/80 transition-colors font-body-md"
+                >
+                  <Download size={20} />
+                  <span className="hidden md:inline">Download</span>
+                </a>
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="text-charcoal-text hover:text-crimson-deep transition-colors"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+            </div>
+            <div className="flex-1 w-full bg-gray-100">
+              <iframe
+                src={`${import.meta.env.BASE_URL}invitation.pdf`}
+                className="w-full h-full border-none"
+                title="Wedding Invitation PDF"
+              />
+            </div>
+          </div>
         </div>
-      </div>
-    </header>
+      )}
+    </>
   );
 }
