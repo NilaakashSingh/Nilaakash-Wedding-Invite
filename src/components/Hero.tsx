@@ -29,33 +29,21 @@ export function Hero() {
 
   return (
     <>
-      <section id="home" className="relative w-full h-screen">
-        <VideoScene
-          src={`${import.meta.env.BASE_URL}videos/intro.mp4`}
-          loop={false}
-          onEnded={handleIntroEnded}
-          className="h-screen"
+      <section id="home" className="px-4 md:px-8 pt-4 pb-8 flex flex-col items-center text-center">
+        <div
+          className="w-full flex border-b border-royal-gold/30 mb-8 max-w-sm mx-auto"
+          role="radiogroup"
+          aria-label="Select Invite Type"
         >
-          {/* We keep this relatively empty as the video plays the monogram/reveal */}
-          {introEnded && !showInterstitial && (
-            <div className="absolute inset-0 flex items-end justify-center pb-24 z-10 animate-fade-in">
-              <button
-                onClick={() => setShowInterstitial(true)}
-                className="text-white bg-black/40 hover:bg-black/60 px-6 py-3 rounded-full backdrop-blur-sm transition-all border border-white/30"
-              >
-                Continue
-              </button>
-            </div>
-          )}
-        </VideoScene>
-      </section>
-
-      {/* Full-screen Choose Your Side Interstitial */}
-      {showInterstitial && (
-        <div className="fixed inset-0 z-[100] bg-ivory-base animate-fade-in flex flex-col md:flex-row">
           <button
-            onClick={() => handleSideSelect('groom')}
-            className="flex-1 relative group overflow-hidden border-b md:border-b-0 md:border-r border-royal-gold/30 h-1/2 md:h-full flex items-center justify-center bg-cream-50"
+            role="radio"
+            aria-checked={inviteType === 'groom'}
+            onClick={() => setInviteType('groom')}
+            className={`flex-1 py-3 font-label-caps text-label-caps transition-all duration-300 border-b-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-crimson-deep ${
+              inviteType === 'groom'
+                ? 'text-crimson-deep border-crimson-deep'
+                : 'text-charcoal-text border-transparent hover:text-crimson-deep'
+            }`}
           >
             <div className="absolute inset-0 bg-blue-900/5 group-hover:bg-blue-900/10 transition-colors duration-500"></div>
             <div className="relative z-10 text-center transform group-hover:scale-105 transition-transform duration-500">
@@ -65,8 +53,14 @@ export function Hero() {
           </button>
 
           <button
-            onClick={() => handleSideSelect('bride')}
-            className="flex-1 relative group overflow-hidden h-1/2 md:h-full flex items-center justify-center bg-cream-50"
+            role="radio"
+            aria-checked={inviteType === 'bride'}
+            onClick={() => setInviteType('bride')}
+            className={`flex-1 py-3 font-label-caps text-label-caps transition-all duration-300 border-b-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-crimson-deep ${
+              inviteType === 'bride'
+                ? 'text-crimson-deep border-crimson-deep'
+                : 'text-charcoal-text border-transparent hover:text-crimson-deep'
+            }`}
           >
             <div className="absolute inset-0 bg-rose-900/5 group-hover:bg-rose-900/10 transition-colors duration-500"></div>
             <div className="relative z-10 text-center transform group-hover:scale-105 transition-transform duration-500">
