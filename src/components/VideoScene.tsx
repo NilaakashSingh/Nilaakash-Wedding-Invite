@@ -23,11 +23,12 @@ export function VideoScene({
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [hasEnded, setHasEnded] = useState(false);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -35,11 +36,13 @@ export function VideoScene({
           if (entry.isIntersecting) {
             if (videoRef.current && !hasEnded) {
               videoRef.current.preload = 'auto';
-              const playPromise = videoRef.current.play();
-              if (playPromise !== undefined) {
-                playPromise.catch((error) => {
-                  console.log('Autoplay prevented:', error);
-                });
+              if (!prefersReducedMotion.matches) {
+                const playPromise = videoRef.current.play();
+                if (playPromise !== undefined) {
+                  playPromise.catch((error) => {
+                    console.log('Autoplay prevented:', error);
+                  });
+                }
               }
             }
           } else {
@@ -93,8 +96,7 @@ export function VideoScene({
         loop={loop}
         preload="none"
         onEnded={handleEnded}
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
+        aria-hidden="true"
       />
 
       <div className="relative z-10 w-full h-full">

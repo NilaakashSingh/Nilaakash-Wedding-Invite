@@ -54,6 +54,7 @@ export function Navbar() {
                 <button
                   onClick={() => setShowModal(false)}
                   className="text-charcoal-text hover:text-crimson-deep transition-colors"
+                  aria-label="Close invitation"
                 >
                   <X size={24} />
                 </button>
