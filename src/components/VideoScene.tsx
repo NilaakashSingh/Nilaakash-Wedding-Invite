@@ -23,7 +23,6 @@ export function VideoScene({
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [hasEnded, setHasEnded] = useState(false);
 
@@ -33,7 +32,8 @@ export function VideoScene({
         entries.forEach((entry) => {
           setIsVisible(entry.isIntersecting);
           if (entry.isIntersecting) {
-            if (videoRef.current && !hasEnded) {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (videoRef.current && !hasEnded && !prefersReducedMotion) {
               videoRef.current.preload = 'auto';
               const playPromise = videoRef.current.play();
               if (playPromise !== undefined) {
@@ -87,14 +87,13 @@ export function VideoScene({
         ref={videoRef}
         src={src}
         poster={poster}
+        aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover z-0"
         playsInline
         muted={isMuted}
         loop={loop}
         preload="none"
         onEnded={handleEnded}
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
       />
 
       <div className="relative z-10 w-full h-full">

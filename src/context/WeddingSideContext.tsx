@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 type Side = 'groom' | 'bride' | null;
 
@@ -31,6 +31,7 @@ export function WeddingSideProvider({ children }: { children: React.ReactNode })
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useWeddingSide() {
   const context = useContext(WeddingSideContext);
   if (context === undefined) {
