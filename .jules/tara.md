@@ -5,3 +5,6 @@
 ## 2024-05-16 - [Respect prefers-reduced-motion in IntersectionObserver triggers]
 **Learning:** Lazy-loaded background videos that auto-play when scrolling into view via `IntersectionObserver` can still violate a user's `prefers-reduced-motion` setting. The motion check must be evaluated at the time of intersection before calling `.play()`.
 **Action:** Always check `window.matchMedia('(prefers-reduced-motion: reduce)').matches` before triggering `.play()` inside an `IntersectionObserver` callback, relying on the `poster` fallback instead.
+## 2024-05-24 - Modal Accessibility Standards
+**Learning:** Custom modals for critical guest information (like the PDF invite) require strict focus management to be usable by screen reader and keyboard-only users.
+**Action:** When implementing new custom modals, ensure `role="dialog"`, `aria-modal="true"`, background scroll locking, focus trapping, and focus restoration are included.
