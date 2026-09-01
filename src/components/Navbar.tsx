@@ -1,16 +1,67 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Download, X } from 'lucide-react';
 
 export function Navbar() {
   const [showModal, setShowModal] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const prevFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setShowModal(false);
-    };
-    window.addEventListener('keydown', handleEsc);
-    return () => window.removeEventListener('keydown', handleEsc);
-  }, []);
+    if (showModal) {
+      prevFocusRef.current = document.activeElement as HTMLElement;
+      document.body.style.overflow = 'hidden';
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setShowModal(false);
+          return;
+        }
+
+        if (e.key === 'Tab' && modalRef.current) {
+          const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), textarea, input, select, iframe'
+          );
+          if (focusableElements.length === 0) return;
+
+          const firstElement = focusableElements[0];
+          const lastElement = focusableElements[focusableElements.length - 1];
+
+          if (e.shiftKey) {
+            if (document.activeElement === firstElement) {
+              lastElement.focus();
+              e.preventDefault();
+            }
+          } else {
+            if (document.activeElement === lastElement) {
+              firstElement.focus();
+              e.preventDefault();
+            }
+          }
+        }
+      };
+
+      window.addEventListener('keydown', handleKeyDown);
+
+      setTimeout(() => {
+        if (modalRef.current) {
+          const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), textarea, input, select, iframe'
+          );
+          if (focusableElements.length > 0) {
+            focusableElements[0].focus();
+          }
+        }
+      }, 10);
+
+      return () => {
+        window.removeEventListener('keydown', handleKeyDown);
+        document.body.style.overflow = '';
+        if (prevFocusRef.current) {
+          prevFocusRef.current.focus();
+        }
+      };
+    }
+  }, [showModal]);
 
   return (
     <>
@@ -33,6 +84,10 @@ export function Navbar() {
       {/* PDF Modal */}
       {showModal && (
         <div
+          ref={modalRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in p-4 md:p-8"
           onClick={() => setShowModal(false)}
         >
@@ -41,7 +96,7 @@ export function Navbar() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center p-4 border-b border-royal-gold/20 bg-cream-50">
-              <h2 className="font-cinzel text-xl text-charcoal-text">Wedding Invitation</h2>
+              <h2 id="modal-title" className="font-cinzel text-xl text-charcoal-text">Wedding Invitation</h2>
               <div className="flex items-center gap-4">
                 <a
                   href={`${import.meta.env.BASE_URL}invitation.pdf`}
